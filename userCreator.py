@@ -1,0 +1,65 @@
+import argparse
+import sys
+import os
+import time
+def combinacionNombre(m,n):
+    newUser.append(m+n)
+    newUser.append(m+'.'+n)
+    newUser.append(m+'_'+n)
+    newUser.append(m+'-'+n)
+def create_arg_parser():
+    # Creates and returns the ArgumentParser object.
+
+    parser = argparse.ArgumentParser(description='Description of your app.')
+    parser.add_argument('-u',
+                    help='User FIle')
+    parser.add_argument('-o',
+                    help='Output file with user variations')
+    return parser
+
+
+if __name__ == "__main__":
+    users=[]
+    newUser=[]
+    arg_parser = create_arg_parser()
+    parsed_args = arg_parser.parse_args(sys.argv[1:])
+    if os.path.exists(parsed_args.u):
+        print("File exist:" + parsed_args.u)
+        r = open(parsed_args.u, "r", encoding="utf8") 
+        for x in r:
+            nombre=x[:x.find(' ')]
+            apellido=x[x.find(' ')+1:]
+            users.append(x)
+            newUser.append(x)
+            # newUser.append(x.replace(' ','.'))
+            # newUser.append(x.replace(' ',''))
+            # newUser.append(x.replace(' ','_'))
+            # newUser.append(x.replace(' ','-'))
+            # Con nombre
+            k=len(nombre)
+            kk=len(apellido)
+            for p in range(k):
+                for pp in range(kk):
+                    combinacionNombre(nombre[0:p+1],apellido[0:pp])
+            for p in range(kk):
+                for pp in range(k):
+                    combinacionNombre(apellido[0:p],nombre[0:pp+1])
+        r.close()
+        combinacionNombre(nombre,apellido)
+        combinacionNombre(apellido,nombre)
+        print(len(users))     
+        for l in newUser:
+            if len(l)>=2:
+                print(l)
+        print(len(users))
+        print(len(newUser))
+        print(parsed_args.o)
+        r = open(parsed_args.o, "a", encoding="utf8")
+        for x in newUser:
+            r.write(x+'\n')
+        r.close()
+            
+       
+       
+       
+       
