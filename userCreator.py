@@ -65,7 +65,7 @@ if __name__ == "__main__":
                  for p in range(k):
                     for pp in range(kk):
                         combinacionNombre(nombre[0:p+1],apellido[0:pp+1])
-                for p in range(kk):
+                 for p in range(kk):
                     for pp in range(k):
                         combinacionNombre(apellido[0:p+1],nombre[0:pp+1])
         r.close()
